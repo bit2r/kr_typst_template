@@ -13,7 +13,7 @@
 library(tidyverse)
 library(gt)
 library(scales)
-library(systemfonts)
+library(showtext)
 library(ggrepel)
 library(ggthemes)
 
@@ -33,18 +33,23 @@ get_extension_path <- function(resource = "") {
 }
 
 # =============================================================================
-# 폰트 설정 (systemfonts 사용)
+# 폰트 설정 (showtext 사용)
 # =============================================================================
 # Pretendard 폰트를 ggplot2에서 사용할 수 있도록 등록
 # Typst PDF 출력에서는 font-paths 설정으로 폰트가 자동 적용됨
 
 tryCatch({
-  systemfonts::register_font(
-    name = "Pretendard",
-    plain = get_extension_path("fonts/Pretendard-Regular.ttf"),
+  # showtext로 폰트 등록
+  font_add(
+    family = "Pretendard",
+    regular = get_extension_path("fonts/Pretendard-Regular.ttf"),
     bold = get_extension_path("fonts/Pretendard-Bold.ttf")
   )
-  message("✓ Pretendard font registered successfully")
+
+  # showtext 자동 활성화
+  showtext_auto()
+
+  message("✓ Pretendard font registered successfully with showtext")
 }, error = function(e) {
   warning("Failed to register Pretendard font: ", e$message)
   warning("Charts may not render Korean text correctly")
