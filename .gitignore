@@ -1,0 +1,20 @@
+# Quarto 생성 파일
+*.pdf
+template.typ
+*.knit.md
+*.rmarkdown
+*_files/
+.quarto/
+
+# R 생성 파일
+.Rhistory
+.RData
+.Rproj.user
+*.Rproj
+
+# 표지 이미지 (Typst로 생성되므로 불필요)
+cover.png
+
+# 시스템 파일
+.DS_Store
+Thumbs.db

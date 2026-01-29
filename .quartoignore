@@ -1,0 +1,8 @@
+.git
+.gitignore
+.github
+*.pdf
+*.png
+cover.png
+docs/
+CLAUDE.md

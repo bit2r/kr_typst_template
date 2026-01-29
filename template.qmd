@@ -1,0 +1,269 @@
+---
+title: "kr_typst_template 사용 가이드"
+subtitle: "한국어 쿼토 보고서 템플릿 - 튜토리얼"
+format:
+  kr_typst_template-typst:
+    lang: ko-KR
+    mainfont: Pretendard
+    fontsize: 11pt
+    papersize: a4
+    font-paths:
+      - _extensions/kr_typst_template/resources/fonts
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    margin:
+      x: 2cm
+      y: 2cm
+---
+
+```{r setup}
+#| include: false
+source("_extensions/kr_typst_template/resources/R/setup.R")
+```
+
+```{=typst}
+#import "_extensions/kr_typst_template/resources/cover.typ": tufte_cover
+
+#tufte_cover(
+  title: "kr_typst_template",
+  subtitle: "사용 가이드 및 튜토리얼",
+  date: "2026년 01월 29일",
+  logo: image("_extensions/kr_typst_template/resources/logo.svg", width: 60pt),
+  accent_color: rgb("#1a5490"),
+)
+
+#set page(margin: (x: 2cm, y: 2cm))
+
+#pagebreak()
+#text(size: 22pt, weight: "bold", fill: rgb("#1a5490"))[목 차]
+#v(8pt)
+#line(length: 100%, stroke: 2.5pt + rgb("#1a5490"))
+#v(20pt)
+#outline(title: none, depth: 3, indent: auto)
+#pagebreak()
+```
+
+# 소개
+
+이 문서는 `kr_typst_template`의 **사용법 가이드**이자 **작업 템플릿**입니다. 이 파일을 복사하여 자신의 보고서를 작성하세요.
+
+# 기본 설정
+
+## YAML 헤더
+
+문서 상단의 YAML에서 기본 설정:
+
+```yaml
+---
+title: "보고서 제목"
+subtitle: "부제목"
+format:
+  kr_typst_template-typst:
+    lang: ko-KR
+    mainfont: Pretendard
+    toc: true
+    number-sections: true
+---
+```
+
+# 표지 커스터마이징
+
+## 기본 표지
+
+```typst
+#tufte_cover(
+  title: "제목",
+  subtitle: "부제목",
+  author: "저자",  // 선택
+  date: "날짜",
+  logo: image("logo.svg", width: 60pt),
+  accent_color: rgb("#1a5490"),
+)
+```
+
+## 색상 옵션
+
+- 파랑 (기본): `rgb("#1a5490")`
+- 빨강: `rgb("#e74c3c")`
+- 초록: `rgb("#27ae60")`
+
+# 차트 작성
+
+## 기본 차트
+
+`theme_tufte_kr()` 자동 적용:
+
+```{r}
+#| label: fig-example
+#| fig-cap: "예시 차트"
+
+library(tidyverse)
+
+data <- tibble(x = 1:10, y = rnorm(10, 100, 15))
+
+ggplot(data, aes(x, y)) +
+  geom_line(color = "#1a5490") +
+  labs(title = "차트 제목")
+```
+
+@fig-example 참조.
+
+# 테이블 작성
+
+## GT 테이블
+
+`gt_theme_tufte()` 자동 적용:
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: "예시 테이블"
+
+tibble(
+  항목 = c("A", "B", "C"),
+  값 = c(100, 200, 300)
+) %>%
+  gt() %>%
+  gt_theme_tufte()
+```
+
+@tbl-example 참조.
+
+# Callout 박스
+
+::: {.callout-note}
+## 참고
+일반 정보
+:::
+
+::: {.callout-tip}
+## 팁
+중요 인사이트
+:::
+
+::: {.callout-warning}
+## 주의
+주의사항
+:::
+
+# 여러 장 통합
+
+## include 사용
+
+```markdown
+{{< include chapter1.qmd >}}
+{{< include chapter2.qmd >}}
+```
+
+## Book 프로젝트
+
+**_quarto.yml:**
+```yaml
+project:
+  type: book
+book:
+  chapters:
+    - index.qmd
+    - ch1.qmd
+format:
+  kr_typst_template-typst:
+    toc: true
+```
+
+# 고급 설정
+
+## 마진 조정
+
+```yaml
+margin:
+  x: 3cm
+  y: 2.5cm
+```
+
+## 폰트 변경
+
+```yaml
+mainfont: "Noto Sans KR"
+font-paths:
+  - /path/to/fonts
+```
+
+# 실전 예시
+
+아래는 실제 보고서 작성 예시입니다.
+
+## 데이터 분석
+
+```{r}
+#| label: fig-sales
+#| fig-cap: "월별 매출"
+#| echo: true
+
+sales <- tibble(
+  month = 1:12,
+  value = c(120, 135, 150, 142, 168, 175,
+            190, 185, 200, 215, 230, 245)
+)
+
+ggplot(sales, aes(month, value)) +
+  geom_line(color = "#1a5490", linewidth = 1.2) +
+  geom_point(color = "#1a5490", size = 3) +
+  scale_y_continuous(labels = scales::label_comma(suffix = "억")) +
+  labs(title = "월별 매출 추이", x = "월", y = "매출")
+```
+
+## 성과 지표
+
+```{r}
+#| label: tbl-kpi
+#| tbl-cap: "주요 KPI"
+
+tibble(
+  지표 = c("매출", "이익", "점유율"),
+  목표 = c("2,000억", "200억", "15%"),
+  실적 = c("2,130억", "225억", "16.5%")
+) %>%
+  gt() %>%
+  gt_theme_tufte() %>%
+  tab_header(title = "2026년 성과")
+```
+
+::: {.callout-tip}
+## 핵심
+모든 지표 **110% 초과 달성**
+:::
+
+# 문제 해결
+
+## 폰트 오류
+`font-paths` 확인
+
+## 표지 미표시
+import 경로 확인
+
+## 한글 깨짐
+`lang: ko-KR` 확인
+
+# 부록
+
+## 필요 패키지
+
+```r
+install.packages(c(
+  "tidyverse", "gt", "scales", "ggthemes"
+))
+```
+
+## 스타일
+
+| 요소 | 크기 | 색상 |
+|------|------|------|
+| H1 | 18pt | #1a5490 |
+| H2 | 14pt | #2c3e50 |
+| 본문 | 11pt | black |
+
+---
+
+**이 파일을 복사하여 보고서를 작성하세요!**
+
+MIT License - Korea R User Group
