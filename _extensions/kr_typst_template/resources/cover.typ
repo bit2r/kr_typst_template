@@ -54,13 +54,16 @@
           dx: 80pt,
           dy: -60pt,
           {
-            // 제목
-            text(
-              size: 48pt,
-              weight: "light",
-              fill: black,
-              font: "Pretendard",
-              title
+            // 제목 (폰트 크기 조정 + 너비 제한)
+            block(
+              width: 90%,
+              text(
+                size: 36pt,
+                weight: "light",
+                fill: black,
+                font: "Pretendard",
+                hyphenate: false,
+              )[#title.replace("\\_", "_")]
             )
 
             // 제목 하단 얇은 선

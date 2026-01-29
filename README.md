@@ -62,6 +62,27 @@ kr_typst_template/
 └── LICENSE
 ```
 
+## 알려진 이슈
+
+### GT 테이블 폰트 경고
+
+렌더링 시 다음과 같은 경고가 표시될 수 있습니다:
+
+```
+warning: unknown font family: system-ui
+warning: unknown font family: segoe ui
+warning: unknown font family: roboto
+...
+```
+
+**이는 정상적인 현상입니다. 무시하셔도 됩니다.**
+
+- **원인**: Quarto의 GT→Typst 변환 과정에서 발생
+- **영향**: 없음 - PDF는 정상 생성됩니다
+- **대응**: 경고 무시하고 사용
+
+> 💡 자세한 내용: [Quarto #12556](https://github.com/quarto-dev/quarto-cli/issues/12556)
+
 ## 문서
 
 - **시작하기**: `template.qmd` 파일 참고

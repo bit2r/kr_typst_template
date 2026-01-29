@@ -73,11 +73,16 @@ theme_tufte_kr <- function(base_size = 16, base_family = "Pretendard") {
 theme_set(theme_tufte_kr())
 
 # =============================================================================
+# GT 글로벌 옵션 설정
+# =============================================================================
+# gt 테이블의 기본 폰트를 Pretendard로 설정
+options(gt.default_fonts = c("Pretendard", "Helvetica", "Arial"))
+
+# =============================================================================
 # GT 테이블용 Tufte 스타일 테마
 # =============================================================================
 gt_theme_tufte <- function(gt_tbl) {
   gt_tbl %>%
-    opt_table_font(font = list(google_font("Noto Sans KR"), "Pretendard", default_fonts())) %>%
     cols_align(align = "center") %>%
     tab_options(
       table.border.top.style = "hidden",

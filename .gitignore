@@ -18,3 +18,5 @@ cover.png
 # 시스템 파일
 .DS_Store
 Thumbs.db
+
+/.luarc.json
