@@ -4,6 +4,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## 미리보기
+
+![Template Preview](template.png)
+
 ## 특징
 
 - **Typst 기반 Tufte 스타일 표지**
