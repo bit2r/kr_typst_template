@@ -1,8 +1,11 @@
 title: Korean Typst Report Template
-author: Your Name
-version: 1.0.0
+author: Korea R User Group
+version: 1.0.1
 quarto-required: ">=1.4.0"
 contributes:
   formats:
     typst:
       template: template.typ
+      format-resources:
+        - resources/cover.typ
+        - resources/logo.svg

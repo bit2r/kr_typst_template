@@ -11,6 +11,7 @@ format:
     papersize: a4
     font-paths:
       - _extensions/kr_typst_template/resources/fonts
+      - _extensions/bit2r/kr_typst_template/resources/fonts
     toc: true
     toc-depth: 3
     number-sections: true
@@ -23,7 +24,11 @@ format:
 #| include: false
 # ⚠️ 필수: 이 setup chunk는 반드시 포함해야 합니다
 # kr_typst_template의 테마, 폰트, 함수를 로드합니다
-source("_extensions/kr_typst_template/resources/R/setup.R")
+setup_paths <- c(
+  "_extensions/kr_typst_template/resources/R/setup.R",
+  "_extensions/bit2r/kr_typst_template/resources/R/setup.R"
+)
+source(setup_paths[file.exists(setup_paths)][1])
 ```
 
 # 소개
@@ -37,7 +42,11 @@ source("_extensions/kr_typst_template/resources/R/setup.R")
 
 ```{{r}}
 #| include: false
-source("_extensions/kr_typst_template/resources/R/setup.R")
+setup_paths <- c(
+  "_extensions/kr_typst_template/resources/R/setup.R",
+  "_extensions/bit2r/kr_typst_template/resources/R/setup.R"
+)
+source(setup_paths[file.exists(setup_paths)][1])
 ```
 
 이 코드는 다음을 자동으로 설정합니다:
@@ -57,7 +66,7 @@ source("_extensions/kr_typst_template/resources/R/setup.R")
 
 문서 상단의 YAML에서 기본 설정:
 
-```yaml
+````yaml
 ---
 title: "보고서 제목"
 subtitle: "부제목"
@@ -70,11 +79,15 @@ format:
     toc: true
     number-sections: true
 ---
+````
 
-```{r}
+```{{r}}
 #| include: false
-source("_extensions/kr_typst_template/resources/R/setup.R")
-```
+setup_paths <- c(
+  "_extensions/kr_typst_template/resources/R/setup.R",
+  "_extensions/bit2r/kr_typst_template/resources/R/setup.R"
+)
+source(setup_paths[file.exists(setup_paths)][1])
 ```
 
 # 표지 커스터마이징

@@ -1,6 +1,5 @@
 # Quarto 생성 파일
 *.pdf
-template.typ
 *.knit.md
 *.rmarkdown
 *_files/
@@ -20,3 +19,5 @@ cover.png
 Thumbs.db
 
 /.luarc.json
+cover.typ
+logo.svg

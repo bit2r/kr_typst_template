@@ -21,8 +21,17 @@ library(ggthemes)
 # Extension 경로 Helper 함수
 # =============================================================================
 get_extension_path <- function(resource = "") {
-  # Extension 기본 경로
-  ext_base <- "_extensions/kr_typst_template/resources"
+  # Extension 기본 경로 후보 (직접 사용 vs quarto add 설치)
+  candidates <- c(
+    "_extensions/kr_typst_template/resources",
+    "_extensions/bit2r/kr_typst_template/resources"
+  )
+
+  ext_base <- candidates[dir.exists(candidates)][1]
+  if (is.na(ext_base)) {
+    stop("kr_typst_template extension을 찾을 수 없습니다. ",
+         "확인 경로: ", paste(candidates, collapse = ", "))
+  }
 
   # 리소스 경로 결합
   if (resource == "") {
